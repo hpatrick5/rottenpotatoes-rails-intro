@@ -16,6 +16,26 @@ class MoviesController < ApplicationController
       
     @movies = Movie.with_ratings(@ratings_to_show)
     @all_ratings = Movie.all_ratings
+    
+    
+    @sort = params[:sort]
+
+    # bg-warning is the Bootstrap class
+    # hilite is a CSS class that sets the color back to normal if we aren't sorting by it
+    if @sort
+      @movies = @movies.order(@sort)
+        case @sort
+        when "title"
+          @title_header = 'bg-warning'
+        when !"title"
+          @title_header = 'hilite'
+        when "release_date"
+          @release_date_header = 'bg-warning'
+        when !"release_date"
+          @release_date_header = 'hilite'
+        end
+    end
+    
   end
 
   def new
