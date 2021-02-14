@@ -17,11 +17,11 @@
   <thead>
     <tr>
       <th class="<%=@title_header%>">
-        <%= link_to "Movie Title", movies_path({:sort => 'title'}), :id => 'title_header' %>
+        <%= link_to "Movie Title", movies_path({:sort => 'title', :ratings => Hash[@ratings_to_show.collect {|item| [item, "1"]}]}), :id => 'title_header' %>
       </th>
       <th>Rating</th>
       <th class="<%=@release_date_header%>">
-        <%= link_to "Release Date", movies_path({:sort => 'release_date'}), :id => 'release_date_header' %>
+        <%= link_to "Release Date", movies_path({:sort => 'release_date', :ratings => Hash[@ratings_to_show.collect {|item| [item, "1"]}]}), :id => 'release_date_header' %>
       </th>
       <th>More Info</th>
     </tr>
