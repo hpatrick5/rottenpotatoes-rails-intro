@@ -10,15 +10,16 @@ class MoviesController < ApplicationController
   def index
     # ratings to show should be determined based on checked boxes
     @ratings_to_show = []
+    @sort = params[:sort]
+    
+
     if !params[:ratings].nil?
       @ratings_to_show = params[:ratings].keys
     end
       
     @movies = Movie.with_ratings(@ratings_to_show)
     @all_ratings = Movie.all_ratings
-    
-    
-    @sort = params[:sort]
+
 
     # bg-warning is the Bootstrap class
     # hilite is a CSS class that sets the color back to normal if we aren't sorting by it
