@@ -8,13 +8,23 @@ class MoviesController < ApplicationController
 
   # Stuff for index.html.erb page
   def index
-    # ratings to show should be determined based on checked boxes
-    @ratings_to_show = []
-    @sort = params[:sort]
+    @ratings_to_show = session[:ratings_to_show].nil? ? [] : session[:ratings_to_show]
     
-
+    if !session[:sort_by].nil?
+      # if the sort by value changed, account for that
+      if !params[:sort].nil? and params[:sort] != session[:sort_by]
+        session[:sort_by] = params[:sort]
+      end
+      @sort = session[:sort_by]
+    else
+      @sort = params[:sort]
+    end
+    
+    session[:sort_by] = @sort
+    
     if !params[:ratings].nil?
       @ratings_to_show = params[:ratings].keys
+      session[:ratings_to_show] = @ratings_to_show
     end
       
     @movies = Movie.with_ratings(@ratings_to_show)
@@ -24,7 +34,7 @@ class MoviesController < ApplicationController
     # bg-warning is the Bootstrap class
     # hilite is a CSS class that sets the color back to normal if we aren't sorting by it
     if @sort
-      @movies = @movies.order(@sort)
+      @movies = @movies.order(@sort) 
         case @sort
         when "title"
           @title_header = 'bg-warning'
