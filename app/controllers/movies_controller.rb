@@ -6,10 +6,17 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
-  # Stuff for index.html.erb page
   def index
-    @ratings_to_show = session[:ratings_to_show].nil? ? [] : session[:ratings_to_show]
+    # Session
+    # Only have this path when you first enter the index page
+    # Otherwise, it is /movies when you go back to index
+    if request.path == '/'
+      reset_session
+    end
     
+    # "Remember"/refill form inputs using session
+    @ratings_to_show = !session[:ratings_to_show].nil? ? session[:ratings_to_show] : []
+
     if !session[:sort_by].nil?
       # if the sort by value changed, account for that
       if !params[:sort].nil? and params[:sort] != session[:sort_by]
@@ -20,13 +27,13 @@ class MoviesController < ApplicationController
       @sort = params[:sort]
     end
     
+    # Set session values
     session[:sort_by] = @sort
+    session[:ratings_to_show] = !params[:ratings].nil? ? @ratings_to_show : []
     
-    if !params[:ratings].nil?
-      @ratings_to_show = params[:ratings].keys
-      session[:ratings_to_show] = @ratings_to_show
-    end
-      
+    # Define what will be shown in the view
+    @ratings_to_show = !params[:ratings].nil? ? params[:ratings].keys : []
+    
     @movies = Movie.with_ratings(@ratings_to_show)
     @all_ratings = Movie.all_ratings
 
