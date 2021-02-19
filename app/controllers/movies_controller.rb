@@ -29,11 +29,13 @@ class MoviesController < ApplicationController
     
     # Set session values
     session[:sort_by] = @sort
-    session[:ratings_to_show] = !params[:ratings].nil? ? @ratings_to_show : []
+    
+    if !params[:ratings].nil?
+      @ratings_to_show = params[:ratings].keys
+      session[:ratings_to_show] = @ratings_to_show
+    end
     
     # Define what will be shown in the view
-    @ratings_to_show = !params[:ratings].nil? ? params[:ratings].keys : []
-    
     @movies = Movie.with_ratings(@ratings_to_show)
     @all_ratings = Movie.all_ratings
 
