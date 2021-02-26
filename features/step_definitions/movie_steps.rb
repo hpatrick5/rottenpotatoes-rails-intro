@@ -1,16 +1,19 @@
 # Add a declarative step here for populating the DB with movies.
 
+Before do
+  DatabaseCleaner.start
+end
+
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
-    # each returned element will be a hash whose key is the table header.
-    # you should arrange to add that movie to the database here.
+    Movie.create!(movie)
   end
-  fail "Unimplemented"
 end
 
 Then /(.*) seed movies should exist/ do | n_seeds |
   Movie.count.should be n_seeds.to_i
 end
+
 
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
@@ -26,13 +29,20 @@ end
 #  "When I check the following ratings: G"
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
-  # HINT: use String#split to split up the rating_list, then
-  #   iterate over the ratings and reuse the "When I check..." or
-  #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  fail "Unimplemented"
+  rating_list.split(",").each do |rating|
+    steps %{
+      When I #{uncheck}check "#{rating}"
+    }
+  end
 end
 
+
 Then /I should see all the movies/ do
-  # Make sure that all the movies in the app are visible in the table
-  fail "Unimplemented"
+  # Find movies table, then body of table (not necessary but prevents you from having to account for the header)
+  # and all the child elements
+  expect(page.find_by_id("movies").find('tbody').all('tr').size).to eq Movie.count
+end
+
+After do
+  DatabaseCleaner.clean
 end
