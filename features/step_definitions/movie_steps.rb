@@ -15,19 +15,14 @@ Then /(.*) seed movies should exist/ do | n_seeds |
 end
 
 
-# Make sure that one string (regexp) occurs before or after another one
-#   on the same page
-
+# Simply need to compare indexes and make sure e2 comes after e1
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
-  #  ensure that that e1 occurs before e2.
-  #  page.body is the entire content of the page as a string.
-  fail "Unimplemented"
+  expect(page.body.index(e1) < page.body.index(e2)).to be true
 end
 
 # Make it easier to express checking or unchecking several boxes at once
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
-
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   rating_list.split(",").each do |rating|
     steps %{
