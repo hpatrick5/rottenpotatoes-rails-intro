@@ -23,15 +23,22 @@ gem 'themoviedb'
 gem 'tzinfo'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'cucumber-rails-training-wheels'
+end 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
+  gem 'capybara'
   gem 'rspec-rails'
   gem 'guard-rspec'
-
+  gem 'database_cleaner'
   gem 'sqlite3', '~> 1.3.13'
+end
 
+group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
