@@ -24,8 +24,8 @@
       <th class="<%=@release_date_header%>">
         <%= link_to "Release Date", movies_path({:sort => 'release_date', :ratings => Hash[@ratings_to_show.collect {|item| [item, "1"]}]}), :id => 'release_date_header' %>
       </th>
-      <th>More Info</th>
       <th>Director</th>
+      <th>More Info</th>
     </tr>
   </thead>
   <tbody>
@@ -41,10 +41,10 @@
           <%= movie.release_date %>
         </td>
         <td>
-          <%= link_to "More about #{movie.title}", movie_path(movie) %>
+          <%= movie.director %>
         </td>
         <td>
-          <%= movie.director %>
+          <%= link_to "More about #{movie.title}", movie_path(movie) %>
         </td>
       </tr>
     <% end %>
