@@ -55,4 +55,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  
+get 'movies/:id/same_directors', to: 'movies#same_directors', as: 'same_directors'
 end

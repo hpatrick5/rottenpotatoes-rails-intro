@@ -61,6 +61,10 @@ class MoviesController < ApplicationController
   def new
     # default: render 'new' template
   end
+  
+  def same_directors
+    redirect_to movies_path(Movie.find_by(:director => Movie.find_by_id(params[:id]).director))
+  end
 
   def create
     @movie = Movie.create!(movie_params)

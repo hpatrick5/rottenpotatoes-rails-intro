@@ -98,6 +98,11 @@ GEM
     diff-lcs (1.4.4)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_bot (5.2.0)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.2.0)
+      factory_bot (~> 5.2.0)
+      railties (>= 4.2.0)
     ffi (1.14.2)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -269,6 +274,7 @@ DEPENDENCIES
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner
+  factory_bot_rails
   guard-rspec
   jquery-rails
   pg (~> 0.21)

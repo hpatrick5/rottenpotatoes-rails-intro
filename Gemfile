@@ -36,6 +36,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'database_cleaner'
   gem 'sqlite3', '~> 1.3.13'
+  gem 'factory_bot_rails'
 end
 
 group :development do
