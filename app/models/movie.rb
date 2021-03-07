@@ -15,10 +15,4 @@ class Movie < ActiveRecord::Base
 
         return Movie.where(rating: ratings_list)
     end
-    
-    def self.similar_movies(title)
-        director = Movie.find_by_title(title).director
-        return nil if director.empty? or director.nil?
-        Movie.where(director: director).pluck(:title)
-    end
 end
