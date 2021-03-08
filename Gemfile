@@ -7,7 +7,7 @@ gem 'rails', '4.2.11.3'
 gem 'bootstrap-sass', '~> 3.3.5'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
@@ -26,15 +26,16 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 group :test do
   gem 'cucumber-rails', require: false
   gem 'cucumber-rails-training-wheels'
+  gem 'simplecov', :require => false
 end 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'capybara'
-  gem 'rspec-rails'
+  gem 'capybara', '2.4.4'
+  gem 'rspec-rails', '3.7.2'
   gem 'guard-rspec'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '1.4.1'
   gem 'sqlite3', '~> 1.3.13'
   gem 'factory_bot_rails'
 end
