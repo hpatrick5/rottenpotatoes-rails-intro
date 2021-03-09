@@ -56,4 +56,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
+  get 'similar/:title',to: 'movies#similar', as: :similar
 end
