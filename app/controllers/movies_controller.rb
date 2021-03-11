@@ -14,25 +14,29 @@ class MoviesController < ApplicationController
       reset_session
     end
     
+    # added to make this testable
+    @session_sort = session[:sort_by]
+    @session_ratings = session[:ratings_to_show]
+    
     # "Remember"/refill form inputs using session
-    @ratings_to_show = !session[:ratings_to_show].nil? ? session[:ratings_to_show] : []
+    @ratings_to_show = !@session_ratings.nil? ? @session_ratings : []
 
-    if !session[:sort_by].nil?
+    if !@session_sort.nil?
       # if the sort by value changed, account for that
-      if !params[:sort].nil? and params[:sort] != session[:sort_by]
-        session[:sort_by] = params[:sort]
+      if !params[:sort].nil? and params[:sort] != @session_sort
+        @session_sort = params[:sort]
       end
-      @sort = session[:sort_by]
+      @sort = @session_sort
     else
       @sort = params[:sort] 
     end
     
     # Set session values
-    session[:sort_by] = @sort
+    @session_sort = @sort
     
     if !params[:ratings].nil?
       @ratings_to_show = params[:ratings].keys
-      session[:ratings_to_show] = @ratings_to_show
+      @session_ratings = @ratings_to_show
     end
     
     # Define what will be shown in the view
@@ -47,12 +51,10 @@ class MoviesController < ApplicationController
         case @sort
         when "title"
           @title_header = 'bg-warning'
-        when !"title"
-          @title_header = 'hilite'
+          @release_date_header = 'hilite'
         when "release_date"
           @release_date_header = 'bg-warning'
-        when !"release_date"
-          @release_date_header = 'hilite'
+          @title_header = 'hilite'
         end
     end
     

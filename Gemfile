@@ -32,8 +32,8 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'capybara', '2.4.4'
-  gem 'rspec-rails', '3.7.2'
+  gem 'capybara'
+  gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'database_cleaner', '1.4.1'
   gem 'sqlite3', '~> 1.3.13'

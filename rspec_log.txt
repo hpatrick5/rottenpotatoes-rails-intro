@@ -1,0 +1,51 @@
+
+MoviesController
+  similar
+    should call the model method that finds the similar movies
+    should display all the movies with the same director
+    should return to index and display a warning if movie has no director info
+  show
+    should find the movie
+    should render show template
+  index
+    should render index template
+    sets ratings_to_show when provided ratings
+    sets sort to provided value
+    should assign title_header bg-warning when passed title, not release_date_header
+    should assign release_date_title bg-warning when passed release_date, not title_header
+  new
+    should render new view
+  create
+    creates a movie
+    redirects to index after create
+  edit
+    should find movie to edit
+    renders the edit template
+  update
+    updates an existing movie
+    redirects to updated movie's page
+  destroy
+    destroys a movie
+    redirects to index after destroy
+
+Movie
+  find_similar
+    director exists
+      should return the correct matches for movies by the same director
+      should not return movies by a different director
+    director does not exist
+      should return nil
+  with_ratings
+    rating list is empty
+      should return all movies
+    rating list contains values
+      should return all movies that match the rating list
+  all_ratings
+    it should return all ratings that are present in the movie list
+
+1 deprecation warning total
+
+Finished in 0.5583 seconds (files took 2.06 seconds to load)
+25 examples, 0 failures
+
+Coverage report generated for RSpec to /home/ec2-user/environment/rottenpotatoes-rails-intro/coverage. 67 / 71 LOC (94.37%) covered.
